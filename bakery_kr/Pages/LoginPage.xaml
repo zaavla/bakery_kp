@@ -1,0 +1,69 @@
+﻿<Page x:Class="bakery_kr.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:bakery_kr.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Авторизация" MinHeight="450" MinWidth="650">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Picture/avtoriz.jpg"/>
+        </Grid.Background>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="240" Height="200">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/Picture/fonavtor.jpg" Stretch="UniformToFill" Opacity="0.75"/>
+            </StackPanel.Background>
+            <TextBlock Name="TBoxLPage" Text="АВТОРИЗАЦИЯ" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Margin="0,5,0,0" Foreground="White" FontFamily="Microsoft JhengHei" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Width="197" VerticalAlignment="Center" HorizontalAlignment="Center" Height="27.96" Margin="-20,20,0,0">
+                <TextBlock Style="{StaticResource BlockCommon}" Text="Логин:" Width="36"/>
+                <TextBox Name="TBoxLogin" Width="143" Margin="5" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center">
+                <TextBlock Text="Пароль:" Width="44" Style="{StaticResource BlockCommon}"/>
+                <TextBox Name="VisibTBoxPassword" Width="143" Margin="5,5,5,5"/>
+                <PasswordBox Name="PBoxPassword" Width="143" Margin="-148,5,5,5" PasswordChanged="PBoxPassword_PasswordChanged"/>
+                <Image Visibility="Hidden" Height="20" Width="35" HorizontalAlignment="Left" Name="ImgShowHide" Stretch="Fill"
+                       Margin="0,0,0,0" MouseLeave="ImgShowHide_MouseLeave" PreviewMouseDown="ImgShowHide_PreviewMouseDown"
+                       PreviewMouseUp="ImgShowHide_PreviewMouseUp" />
+            </StackPanel>
+            <Button x:Name="BtnLogin" Click="BtnLogin_Click" Content="Войти"
+                    Height="24" Width="150" Margin="5,10,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1" Opacity="0.75">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5" AngleX="0"/>
+                                <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform X="0"/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFDE8E42" Offset="1"/>
+                        <GradientStop Color="#FF68240B"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="BtnReg" Click="BtnReg_Click" Content="Зарегистрироваться"
+                    Height="24" Width="150" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1" Opacity="0.75">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5" AngleX="0"/>
+                                <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform X="0"/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFDE8E42" Offset="1"/>
+                        <GradientStop Color="#FF68240B"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <Frame x:Name="LogPage"/>
+    </Grid>
+</Page>

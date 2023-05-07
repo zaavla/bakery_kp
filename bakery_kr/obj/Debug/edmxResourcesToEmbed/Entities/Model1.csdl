@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bakeryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="bakeryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clients" EntityType="bakeryModel.clients" />
+    <EntitySet Name="ingredients" EntityType="bakeryModel.ingredients" />
+    <EntitySet Name="pastry_ingredient" EntityType="bakeryModel.pastry_ingredient" />
+    <EntitySet Name="pastry_sale" EntityType="bakeryModel.pastry_sale" />
+    <EntitySet Name="Pastrys" EntityType="bakeryModel.Pastrys" />
+    <EntitySet Name="payment" EntityType="bakeryModel.payment" />
+    <EntitySet Name="Role" EntityType="bakeryModel.Role" />
+    <EntitySet Name="sale" EntityType="bakeryModel.sale" />
+    <EntitySet Name="Sales" EntityType="bakeryModel.Sales" />
+    <EntitySet Name="sysdiagrams" EntityType="bakeryModel.sysdiagrams" />
+    <EntitySet Name="User" EntityType="bakeryModel.User" />
+    <EntitySet Name="workers" EntityType="bakeryModel.workers" />
+    <AssociationSet Name="FK_sale_clients" Association="bakeryModel.FK_sale_clients">
+      <End Role="clients" EntitySet="clients" />
+      <End Role="sale" EntitySet="sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pastry_ingredient_ingredients" Association="bakeryModel.FK_pastry_ingredient_ingredients">
+      <End Role="ingredients" EntitySet="ingredients" />
+      <End Role="pastry_ingredient" EntitySet="pastry_ingredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pastry_ingredient_Pastrys" Association="bakeryModel.FK_pastry_ingredient_Pastrys">
+      <End Role="Pastrys" EntitySet="Pastrys" />
+      <End Role="pastry_ingredient" EntitySet="pastry_ingredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pastry_sale_Pastrys" Association="bakeryModel.FK_pastry_sale_Pastrys">
+      <End Role="Pastrys" EntitySet="Pastrys" />
+      <End Role="pastry_sale" EntitySet="pastry_sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pastry_sale_sale" Association="bakeryModel.FK_pastry_sale_sale">
+      <End Role="sale" EntitySet="sale" />
+      <End Role="pastry_sale" EntitySet="pastry_sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sales_Pastrys" Association="bakeryModel.FK_Sales_Pastrys">
+      <End Role="Pastrys" EntitySet="Pastrys" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sale_payment" Association="bakeryModel.FK_sale_payment">
+      <End Role="payment" EntitySet="payment" />
+      <End Role="sale" EntitySet="sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="bakeryModel.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sales_User" Association="bakeryModel.FK_Sales_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="worker_sale" Association="bakeryModel.worker_sale">
+      <End Role="sale" EntitySet="sale" />
+      <End Role="workers" EntitySet="workers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="clients">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="f" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="i" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="o" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="sale" Relationship="bakeryModel.FK_sale_clients" FromRole="clients" ToRole="sale" />
+  </EntityType>
+  <EntityType Name="ingredients">
+    <Key>
+      <PropertyRef Name="id_ingredient" />
+    </Key>
+    <Property Name="id_ingredient" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="measure_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="pastry_ingredient" Relationship="bakeryModel.FK_pastry_ingredient_ingredients" FromRole="ingredients" ToRole="pastry_ingredient" />
+  </EntityType>
+  <EntityType Name="pastry_ingredient">
+    <Key>
+      <PropertyRef Name="id_pastry" />
+      <PropertyRef Name="id_ingredient" />
+    </Key>
+    <Property Name="id_pastry" Type="Int32" Nullable="false" />
+    <Property Name="id_ingredient" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="ingredients" Relationship="bakeryModel.FK_pastry_ingredient_ingredients" FromRole="pastry_ingredient" ToRole="ingredients" />
+    <NavigationProperty Name="Pastrys" Relationship="bakeryModel.FK_pastry_ingredient_Pastrys" FromRole="pastry_ingredient" ToRole="Pastrys" />
+  </EntityType>
+  <EntityType Name="pastry_sale">
+    <Key>
+      <PropertyRef Name="id_pastry" />
+      <PropertyRef Name="id_sale" />
+    </Key>
+    <Property Name="id_pastry" Type="Int32" Nullable="false" />
+    <Property Name="id_sale" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="Pastrys" Relationship="bakeryModel.FK_pastry_sale_Pastrys" FromRole="pastry_sale" ToRole="Pastrys" />
+    <NavigationProperty Name="sale" Relationship="bakeryModel.FK_pastry_sale_sale" FromRole="pastry_sale" ToRole="sale" />
+  </EntityType>
+  <EntityType Name="Pastrys">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MainImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="pastry_ingredient" Relationship="bakeryModel.FK_pastry_ingredient_Pastrys" FromRole="Pastrys" ToRole="pastry_ingredient" />
+    <NavigationProperty Name="pastry_sale" Relationship="bakeryModel.FK_pastry_sale_Pastrys" FromRole="Pastrys" ToRole="pastry_sale" />
+    <NavigationProperty Name="Sales" Relationship="bakeryModel.FK_Sales_Pastrys" FromRole="Pastrys" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="payment">
+    <Key>
+      <PropertyRef Name="id_payment" />
+    </Key>
+    <Property Name="id_payment" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="sale" Relationship="bakeryModel.FK_sale_payment" FromRole="payment" ToRole="sale" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="bakeryModel.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="id_sale" />
+    </Key>
+    <Property Name="id_sale" Type="Int32" Nullable="false" />
+    <Property Name="id_client" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="date_sale" Type="DateTime" Precision="0" />
+    <Property Name="id_payment" Type="Int32" />
+    <NavigationProperty Name="clients" Relationship="bakeryModel.FK_sale_clients" FromRole="sale" ToRole="clients" />
+    <NavigationProperty Name="pastry_sale" Relationship="bakeryModel.FK_pastry_sale_sale" FromRole="sale" ToRole="pastry_sale" />
+    <NavigationProperty Name="payment" Relationship="bakeryModel.FK_sale_payment" FromRole="sale" ToRole="payment" />
+    <NavigationProperty Name="workers" Relationship="bakeryModel.worker_sale" FromRole="sale" ToRole="workers" />
+  </EntityType>
+  <EntityType Name="Sales">
+    <Key>
+      <PropertyRef Name="Id_Sale" />
+    </Key>
+    <Property Name="Id_Sale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Sale" Type="DateTime" Precision="0" />
+    <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Id_Pastry" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="TotalCost" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Pastrys" Relationship="bakeryModel.FK_Sales_Pastrys" FromRole="Sales" ToRole="Pastrys" />
+    <NavigationProperty Name="User" Relationship="bakeryModel.FK_Sales_User" FromRole="Sales" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Roled" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="bakeryModel.FK_User_Role" FromRole="User" ToRole="Role" />
+    <NavigationProperty Name="Sales" Relationship="bakeryModel.FK_Sales_User" FromRole="User" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="workers">
+    <Key>
+      <PropertyRef Name="id_worker" />
+    </Key>
+    <Property Name="id_worker" Type="Int32" Nullable="false" />
+    <Property Name="f" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="i" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="o" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="Int32" />
+    <NavigationProperty Name="sale" Relationship="bakeryModel.worker_sale" FromRole="workers" ToRole="sale" />
+  </EntityType>
+  <Association Name="FK_sale_clients">
+    <End Type="bakeryModel.clients" Role="clients" Multiplicity="0..1" />
+    <End Type="bakeryModel.sale" Role="sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clients">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="sale">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pastry_ingredient_ingredients">
+    <End Type="bakeryModel.ingredients" Role="ingredients" Multiplicity="1" />
+    <End Type="bakeryModel.pastry_ingredient" Role="pastry_ingredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ingredients">
+        <PropertyRef Name="id_ingredient" />
+      </Principal>
+      <Dependent Role="pastry_ingredient">
+        <PropertyRef Name="id_ingredient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pastry_ingredient_Pastrys">
+    <End Type="bakeryModel.Pastrys" Role="Pastrys" Multiplicity="1" />
+    <End Type="bakeryModel.pastry_ingredient" Role="pastry_ingredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pastrys">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="pastry_ingredient">
+        <PropertyRef Name="id_pastry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pastry_sale_Pastrys">
+    <End Type="bakeryModel.Pastrys" Role="Pastrys" Multiplicity="1" />
+    <End Type="bakeryModel.pastry_sale" Role="pastry_sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pastrys">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="pastry_sale">
+        <PropertyRef Name="id_pastry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pastry_sale_sale">
+    <End Type="bakeryModel.sale" Role="sale" Multiplicity="1" />
+    <End Type="bakeryModel.pastry_sale" Role="pastry_sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sale">
+        <PropertyRef Name="id_sale" />
+      </Principal>
+      <Dependent Role="pastry_sale">
+        <PropertyRef Name="id_sale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sales_Pastrys">
+    <End Type="bakeryModel.Pastrys" Role="Pastrys" Multiplicity="0..1" />
+    <End Type="bakeryModel.Sales" Role="Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pastrys">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="Id_Pastry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sale_payment">
+    <End Type="bakeryModel.payment" Role="payment" Multiplicity="0..1" />
+    <End Type="bakeryModel.sale" Role="sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="payment">
+        <PropertyRef Name="id_payment" />
+      </Principal>
+      <Dependent Role="sale">
+        <PropertyRef Name="id_payment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Type="bakeryModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="bakeryModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Roled" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sales_User">
+    <End Type="bakeryModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="bakeryModel.Sales" Role="Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="worker_sale">
+    <End Type="bakeryModel.sale" Role="sale" Multiplicity="*" />
+    <End Type="bakeryModel.workers" Role="workers" Multiplicity="*" />
+  </Association>
+</Schema>

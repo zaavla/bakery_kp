@@ -1,0 +1,6 @@
+D:\rpm\bakery_kr\ClassLibrary\bin\Debug\ClassLibrary.dll
+D:\rpm\bakery_kr\ClassLibrary\bin\Debug\ClassLibrary.pdb
+D:\rpm\bakery_kr\ClassLibrary\obj\Debug\ClassLibrary.csproj.AssemblyReference.cache
+D:\rpm\bakery_kr\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+D:\rpm\bakery_kr\ClassLibrary\obj\Debug\ClassLibrary.dll
+D:\rpm\bakery_kr\ClassLibrary\obj\Debug\ClassLibrary.pdb
